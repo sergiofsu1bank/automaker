@@ -1,4 +1,8 @@
+plotly
 pandas
+numpy
+seaborn
+matplotlib
+plotly
 pycaret
 scikit-learn
-numpy
