@@ -3,6 +3,7 @@ import pandas as pd
 
 
 class DataLoader:
+ 
     def __init__(self):
         # Caminho base do projeto (nível acima da pasta autosage/)
         self.base_dir = os.path.dirname(
@@ -14,7 +15,8 @@ class DataLoader:
             return file_path
 
         # Caso contrário, assume que está dentro da pasta /data
-        return os.path.join(self.base_dir, "data", file_path)
+        # return os.path.join(self.base_dir, "arquive\\input", file_path)
+        return os.path.join(self.base_dir, "arquive", "input", file_path)
 
     def load(self, file_path):
         # Resolve caminho correto
@@ -35,5 +37,3 @@ class DataLoader:
                     "Formato de arquivo não suportado. Use .csv ou .xlsx")
 
         return df
-
-   

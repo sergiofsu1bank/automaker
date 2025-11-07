@@ -1,45 +1,48 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from exploracao_dados.core.data_loader import DataLoader
-from exploracao_dados.core.data_explore import DataExplore
-from exploracao_dados.core.data_graphic import DataGraphic
+from data_explore.data.data_loader import DataLoader
+from data_explore.data.data_explore import DataExplore
+from data_explore.data.data_graphic import DataGraphic
+from data_explore.business.data_business import DataBusiness
 
 
 class Main:
+
     def __init__(self):
         self.loader = DataLoader()
         self.explore = DataExplore()
         self.graphic = DataGraphic()
+        self.business = DataBusiness()
 
     def run(self):
         dataset = "credit_data.csv"
         df = self.loader.load(dataset)
         return df
 
-    def exploreData(self, df):
+    def explore_data(self, df):
         print('-' * 50)
-        data = self.explore.firstLines(df)
+        data = self.explore.first_lines(df)
         print(data)
         print('-' * 50)
-        data = self.explore.lastLines(df)
+        data = self.explore.last_lines(df)
         print(data)
         print('-' * 50)
-        data = self.explore.quantityCurrences(df)
+        data = self.explore.quantity_currences(df)
         print(data)
         print('-' * 50)
-        data = self.explore.quantityLineColl(df)
+        data = self.explore.quantity_line_coll(df)
         print(data)
         print('-' * 50)
         data = self.explore.basic_summary(df)
         colName = "default"
-        data = self.explore.uniqueValues(df, colName)
+        data = self.explore.unique_values(df, colName)
         print(data)
         print('-' * 50)
-        data = self.explore.uniqueValuesCount(df, colName)
+        data = self.explore.unique_values_count(df, colName)
         print(data)
 
-    def exploreGraphic(self, df):
+    def explore_graphic(self, df):
         print('-' * 50)
         colName = "default"
         data = self.graphic.count_plot(df, colName)
@@ -61,4 +64,5 @@ if __name__ == "__main__":
     app = Main()
     df = app.run()
     # app.exploreData(df)
-    app.exploreGraphic(df)
+    # app.exploreGraphic(df)
+    app.business.normalization_data(df)
