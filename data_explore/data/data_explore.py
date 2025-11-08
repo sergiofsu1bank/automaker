@@ -55,38 +55,3 @@ class DataExplore:
     def set_mean_collumn(self, df, colName):
         df[colName] = df[colName].fillna(df[colName].mean())
         return df
-
-    def get_target(self, df):
-        """
-        Identifica a variável target com 100% de acurácia
-        baseada em regras determinísticas:
-
-        1. Se existir coluna binária exclusiva {0,1}, ela é o target.
-        2. Se houver mais de uma binária, usa a última coluna.
-        3. Se não houver binária, assume a última coluna.
-        """
-        colunas_binarias = []
-
-        for col in df.columns:
-            valores = set(df[col].dropna().unique())
-            if valores.issubset({0, 1}) and len(valores) >= 1:
-                colunas_binarias.append(col)
-
-        # Regra 1: se só existe uma binária → é o target
-        if len(colunas_binarias) == 1:
-            return colunas_binarias[0]
-
-        # Regra 2: se há várias binárias → usa a última
-        if len(colunas_binarias) > 1:
-            return colunas_binarias[-1]
-
-        # Regra 3: fallback → assume última coluna
-        return df.columns[-1]
-
-    def get_predictors(self, df):
-        """
-        Retorna todas as colunas preditoras (features),
-        removendo automaticamente a coluna target.
-        """
-        target = self.get_target(df)
-        return df.drop(columns=[target])

@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
+
 
 from data_explore.data.data_loader import DataLoader
 from data_explore.data.data_explore import DataExplore
@@ -65,4 +67,5 @@ if __name__ == "__main__":
     df = app.run()
     # app.exploreData(df)
     # app.exploreGraphic(df)
-    app.business.normalization_data(df)
+    X_train_norm, X_test_norm, y_train, y_test = app.business.normalization_data(
+        df)
